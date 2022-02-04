@@ -3,8 +3,10 @@ import Link from "next/link";
 import type { NextPage } from "next";
 import { AiFillGithub, AiOutlineTwitter } from "react-icons/ai";
 import { HiOutlineGlobeAlt } from "react-icons/hi";
+import { FiCopy } from "react-icons/fi";
 import { NextSeo } from "next-seo";
 import toast from "react-hot-toast";
+import copy from "copy-to-clipboard";
 import { createLink, generateRandomTag, UrlItem } from "@/utils/helpers";
 
 const Home: NextPage = () => {
@@ -44,11 +46,24 @@ const Home: NextPage = () => {
           className="flex h-screen w-full flex-col items-center justify-center space-y-4"
         >
           {data && (
-            <Link href={`${window.location.origin}/${data.tag}`} passHref>
-              <a target="_blank" rel="noreferrer">
-                {window.location.origin}/{data.tag}
-              </a>
-            </Link>
+            <div className="flex w-full items-center rounded-md bg-green-600 md:w-3/4 lg:w-1/2">
+              <Link href={`${window.location.origin}/${data.tag}`} passHref>
+                <a target="_blank" rel="noreferrer" className="flex-1 truncate px-4 py-2 underline">
+                  {window.location.origin}/{data.tag}
+                </a>
+              </Link>
+
+              <button
+                type="button"
+                className="p-2 active:opacity-70"
+                onClick={() => {
+                  copy(`${window.location.origin}/${data.tag}`);
+                  toast.success("Link copied to clipboard");
+                }}
+              >
+                <FiCopy className="h-6 w-6" />
+              </button>
+            </div>
           )}
 
           <div className="flex w-full items-center overflow-hidden rounded-md border-2 border-neutral-700 transition-colors duration-200 focus-within:border-blue-600">

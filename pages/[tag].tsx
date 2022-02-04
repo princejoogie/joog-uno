@@ -21,7 +21,6 @@ const TagComponent = () => {
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { tag } = context.params as { tag: string };
-
   const data = await getItemByTag(tag);
 
   if (!data) {
