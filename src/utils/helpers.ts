@@ -6,13 +6,13 @@ export interface UrlItem {
   tag: string;
 }
 
-export const tagExists = async (tag: string) => {
+export const getItemByTag = async (tag: string): Promise<UrlItem | null> => {
   const docRef = doc(db, "urls", tag.trim());
   const docSnap = await getDoc(docRef);
-  return docSnap.exists();
+  return docSnap.exists() ? (docSnap.data() as UrlItem) : null;
 };
 
-export const getUrlItem = async (url: string): Promise<UrlItem | null> => {
+export const getItemByUrl = async (url: string): Promise<UrlItem | null> => {
   const urlsRef = collection(db, "urls");
   const q = query(urlsRef, where("url", "==", url.trim()));
   const docSnaps = await getDocs(q);
@@ -32,16 +32,16 @@ export const generateRandomTag = async (): Promise<string> => {
 
   for (let i = 0; i < length; i++)
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  if (await tagExists(result)) return generateRandomTag();
+  if (await getItemByTag(result)) return generateRandomTag();
 
   return result;
 };
 
 export const createLink = async (url: string, tag: string): Promise<UrlItem> => {
-  const _url = await getUrlItem(url);
+  const _url = await getItemByUrl(url);
   if (_url) return _url;
 
-  const exists = await tagExists(tag);
+  const exists = await getItemByTag(tag);
   if (exists) throw new Error("Tag already exists");
 
   const docRef = doc(db, "urls", tag.trim());
