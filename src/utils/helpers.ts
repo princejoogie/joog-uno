@@ -41,8 +41,7 @@ export const createLink = async (url: string, tag: string): Promise<UrlItem> => 
   const _url = await getItemByUrl(url);
   if (_url) return _url;
 
-  const exists = await getItemByTag(tag);
-  if (exists) throw new Error("Tag already exists");
+  if (await getItemByTag(tag)) throw new Error("Tag already exists");
 
   const docRef = doc(db, "urls", tag.trim());
   try {
