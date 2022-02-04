@@ -1,10 +1,7 @@
 # joog-uno
 
-![CI](https://github.com/princejoogie/paymongo.js/actions/workflows/main.yml/badge.svg)
-![CJS](https://img.badgesize.io/princejoogie/paymongo.js/main/dist/paymongo.js.cjs.production.min.js?label=CJS)
-![ESM](https://img.badgesize.io/princejoogie/paymongo.js/main/dist/paymongo.js.esm.js?label=ESM)
 ![License](https://img.shields.io/badge/license-MIT-brightgreen?style=flat)
-![Version](https://img.shields.io/github/v/release/princejoogie/paymongo.js?color=%2349C31B&include_prereleases&label=version)
+![Version](https://img.shields.io/github/v/release/princejoogie/joog-uno?color=%2349C31B&include_prereleases&label=version)
 
 URL Shortener with NextJS and TailwindCSS
 
@@ -19,8 +16,16 @@ git init .
 
 ## Usage
 
+### Development
+
 ```bash
 yarn dev # or npm run dev
+```
+
+### Build
+
+```bash
+yarn build # or npm run build
 ```
 
 ---
